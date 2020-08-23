@@ -18,5 +18,4 @@ install(EXPORT YahooFinanceExport NAMESPACE Upstream::
 if (BUILD_TESTS)
     add_executable(test test/Test.cpp)
     target_link_libraries(test ${CURL_LIBRARIES})
-    target_link_libraries(test YahooFinance)
 endif()
