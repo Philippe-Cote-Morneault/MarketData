@@ -7,7 +7,7 @@
 
 #include "./json.hpp"
 
-namespace yahoo_finance {
+namespace market_data {
     namespace nasdaq {
         class RealTimeTrade {
         public:
