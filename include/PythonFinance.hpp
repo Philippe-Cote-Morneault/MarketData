@@ -1,7 +1,9 @@
 #include <string>
 #include <curl/curl.h>
 
-namespace python_finance {
+#include "./json.hpp"
+
+namespace yahoo_finance {
     namespace {
         inline std::string formatUrl(const std::string &symbol, long start, long end) {
             return "https://query1.finance.yahoo.com/v8/finance/chart/" +
@@ -16,7 +18,6 @@ namespace python_finance {
 
     inline size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
     {
-        auto potato = (char*)contents;
         ((std::string*)userp)->append((char*)contents, size * nmemb);
         return size * nmemb;
     }
@@ -34,5 +35,26 @@ namespace python_finance {
         }
 
         return readBuffer;
+    }
+
+    inline nlohmann::json getSymbolSummary(const std::string &symbol) {
+        CURL *curl = curl_easy_init();
+        std::string url = "https://finance.yahoo.com/quote/" + symbol;
+
+        std::string readBuffer;
+        if (curl) {
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+            curl_easy_perform(curl);
+            curl_easy_cleanup(curl);
+        }
+
+        size_t firstPos = readBuffer.find("root.App.main = ");
+        size_t secondPos = readBuffer.find("(this)", firstPos);
+
+        nlohmann::json j = nlohmann::json::parse(readBuffer.substr(firstPos + 16, secondPos - 3 - firstPos - 16));
+
+        return j;
     }
 }
