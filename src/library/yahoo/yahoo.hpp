@@ -1,3 +1,6 @@
+#ifndef MARKET_DATA_YAHOO_YAHOO_HPP_
+#define MARKET_DATA_YAHOO_YAHOO_HPP_
+
 #include <string>
 #include <curl/curl.h>
 
@@ -59,3 +62,5 @@ namespace market_data {
         }
     }
 }
+
+#endif

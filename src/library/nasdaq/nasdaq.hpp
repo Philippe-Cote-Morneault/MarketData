@@ -1,3 +1,6 @@
+#ifndef MARKET_DATA_NASDAQ_NASDAQ_HPP_
+#define MARKET_DATA_NASDAQ_NASDAQ_HPP_
+
 #include <string>
 #include <ctime>
 #include <limits.h>
@@ -74,3 +77,5 @@ namespace market_data {
 
     }
 }
+
+#endif
