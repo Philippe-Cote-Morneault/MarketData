@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 
+#include "../../api.hpp"
 #include "../../../include/json.hpp"
 
 namespace market_data {
@@ -23,10 +24,13 @@ namespace market_data {
         };
 
         namespace {
-            inline std::string formatUrl(const std::string &symbol, const std::string &time, int limit);
+            std::string formatUrl(const std::string &symbol, const std::string &time, int limit);
         }
 
-        inline size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
+        inline size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+            ((std::string*)userp)->append((char*)contents, size * nmemb);
+            return size * nmemb;
+        }
 
         void to_json(nlohmann::json& j, const RealTimeTrade& p);
 

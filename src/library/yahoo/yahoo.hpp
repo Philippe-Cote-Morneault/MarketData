@@ -9,14 +9,17 @@
 namespace market_data {
     namespace yahoo {
         namespace {
-            inline std::string formatUrl(const std::string &symbol, long start, long end);
+            std::string formatUrl(const std::string &symbol, long start, long end);
         }
 
-        inline size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
+        inline size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+            ((std::string *) userp)->append((char *) contents, size * nmemb);
+            return size * nmemb;
+        }
 
-        inline std::string getSymbolChart(const std::string &symbol, long start, long end);
+        std::string getSymbolChart(const std::string &symbol, long start, long end);
 
-        inline nlohmann::json getSymbolSummary(const std::string &symbol);
+        nlohmann::json getSymbolSummary(const std::string &symbol);
     }
 }
 
