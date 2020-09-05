@@ -2,8 +2,10 @@
 #include <time.h>
 #include <vector>
 
-#include "../include/YahooFinance.hpp"
-#include "../include/Nasdaq.hpp"
+#include <curl/curl.h>
+
+#include <library/nasdaq.hpp>
+#include <library/yahoo.hpp>
 
 int main() {
     market_data::yahoo_finance::getSymbolChart("MSFT", 1564617600, 1596672000);
@@ -15,5 +17,6 @@ int main() {
     for (int i = 0; i < trades.size(); ++i) {
         std::cout << trades[i].price << std::endl;
     }
+
     return 0;
 }

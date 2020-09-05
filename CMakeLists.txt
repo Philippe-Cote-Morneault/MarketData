@@ -1,21 +1,6 @@
-cmake_minimum_required(VERSION 3.12)
-project(YahooFinance)
+cmake_minimum_required(VERSION 3.3)
 
-set(CMAKE_CXX_STANDARD 11)
+project(potato)
 
-find_package(CURL REQUIRED)
-
-set(BUILD_TESTS OFF)
-option(BUILD_TESTS "BUILD_TESTS" OFF)
-
-add_library(YahooFinance INTERFACE)
-target_include_directories(YahooFinance INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}> $<INSTALL_INTERFACE:include>)
-install(TARGETS YahooFinance EXPORT YahooFinanceExport)
-install(EXPORT YahooFinanceExport NAMESPACE Upstream::
-        DESTINATION lib/cmake/PythonFinance
-        )
-
-if (BUILD_TESTS)
-    add_executable(test test/Test.cpp)
-    target_link_libraries(test ${CURL_LIBRARIES})
-endif()
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/src")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/test")

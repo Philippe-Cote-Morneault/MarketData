@@ -1,7 +1,7 @@
 #include <string>
 #include <curl/curl.h>
 
-#include "./json.hpp"
+#include "../../../include/json.hpp"
 
 namespace market_data {
     namespace yahoo_finance {
