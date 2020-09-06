@@ -4,7 +4,7 @@
 #include <string>
 #include <curl/curl.h>
 
-#include "../../../include/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace market_data {
     namespace yahoo {

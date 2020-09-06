@@ -8,8 +8,10 @@
 #include <fstream>
 #include <vector>
 
+#include <nlohmann/json.hpp>
 #include "../../api.hpp"
-#include "../../../include/json.hpp"
+
+
 
 namespace market_data {
     namespace nasdaq {
