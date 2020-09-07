@@ -4,8 +4,8 @@
 
 #include <curl/curl.h>
 
-#include <library/nasdaq.hpp>
-#include <library/yahoo.hpp>
+#include <market_data/yahoo/yahoo.hpp>
+#include <market_data/nasdaq/nasdaq.hpp>
 
 int main() {
     market_data::yahoo::getSymbolChart("MSFT", 1564617600, 1596672000);

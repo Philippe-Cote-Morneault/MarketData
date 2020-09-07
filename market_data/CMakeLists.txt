@@ -11,21 +11,29 @@ find_package(nlohmann_json REQUIRED)
 
 # define the library
 
+include_directories()
+
 set(library_srcs
-        library/nasdaq/nasdaq.cpp
-        library/yahoo/yahoo.cpp
+        nasdaq/nasdaq.cpp
+        yahoo/yahoo.cpp
         )
 
 add_library(market_data_static STATIC ${library_srcs})
 target_include_directories(
         market_data_static
         PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
         $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(market_data_static
         ${CURL_LIBRARIES})
 add_library(market_data_shared SHARED ${library_srcs})
+target_include_directories(
+        market_data_shared
+        PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+        $<INSTALL_INTERFACE:include>
+)
 target_link_libraries(market_data_shared
         ${CURL_LIBRARIES})
 
@@ -33,12 +41,18 @@ add_library(market_data_iface INTERFACE)
 target_compile_definitions(market_data_iface
         INTERFACE LIBRARY_HEADER_ONLY
         )
+target_include_directories(
+        market_data_iface
+        INTERFACE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+        $<INSTALL_INTERFACE:include>
+)
 target_link_libraries(market_data_iface INTERFACE
         ${CURL_LIBRARIES})
 
 set(installed_srcs
-        include/market_data/library/nasdaq/nasdaq.cpp
-        include/market_data/library/yahoo/yahoo.cpp
+        include/market_data/nasdaq/nasdaq.cpp
+        include/market_data/yahoo/yahoo.cpp
         )
 add_library(market_data_srcs INTERFACE)
 target_sources(market_data_srcs INTERFACE

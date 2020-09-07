@@ -10,12 +10,11 @@ add_executable(test
         test.cpp
         )
 
-#include_directories(../src)
-#link_directories(../src)
+#include_directories(../market_data)
+#link_directories(../market_data)
 
 ## uncomment only one of these!
-target_link_libraries(test market_data_static)
-#target_link_libraries(test ${CURL_LIBRARIES})
- #target_link_libraries(test market_data::market_data_shared)
- #target_link_libraries(test market_data::market_data_iface)
+#target_link_libraries(test market_data_static)
+ #target_link_libraries(test market_data_shared)
+ target_link_libraries(test market_data_iface)
 #target_link_libraries(test market_data::market_data_srcs)

@@ -2,7 +2,7 @@
 #define MARKET_DATA_HPP_
 
 #include "./api.hpp"
-#include "./library/nasdaq.hpp"
-#include "./library/yahoo.hpp"
+#include "./nasdaq/nasdaq.hpp"
+#include "./yahoo/yahoo.hpp"
 
 #endif
