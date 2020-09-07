@@ -4,7 +4,7 @@ project(test)
 
 #find_package(CURL REQUIRED)
 
-#find_package(market_data REQUIRED)
+find_package(market_data REQUIRED)
 
 add_executable(test
         test.cpp

@@ -27,6 +27,7 @@ target_include_directories(
 )
 target_link_libraries(market_data_static
         ${CURL_LIBRARIES})
+
 add_library(market_data_shared SHARED ${library_srcs})
 target_include_directories(
         market_data_shared
@@ -64,9 +65,9 @@ target_link_libraries(market_data_srcs INTERFACE
 # install and export the library
 
 install(DIRECTORY
-        library
+        ${CMAKE_CURRENT_LIST_DIR}
         DESTINATION
-        include/market_data
+        include/
         )
 install(FILES
         market_data.hpp
